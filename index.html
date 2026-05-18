@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Maryann ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             /* Base Theme Configuration */
@@ -18,7 +23,8 @@
 
         body, html {
             margin: 0; padding: 0; height: 100vh; width: 100vw;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            /* 🖋️ Integrated Playful Body Font */
+            font-family: 'Quicksand', sans-serif;
             color: var(--text-dark); overflow: hidden;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
@@ -58,8 +64,11 @@
         }
 
         header { text-align: center; margin-bottom: 20px; z-index: 5; }
-        header h1 { color: #0077b6; font-size: 2.8em; margin: 0; transition: color 0.4s; }
-        header p { font-style: italic; color: #4361ee; font-size: 1.15em; margin: 6px 0 0; font-weight: 500; }
+        header h1 { 
+            font-family: 'Dancing Script', cursive; /* 🥰 Handwriting Calligraphy Override */
+            color: #0077b6; font-size: 3.8em; margin: 0; transition: color 0.4s; 
+        }
+        header p { font-style: italic; color: #4361ee; font-size: 1.2em; margin: 6px 0 0; font-weight: 700; }
 
         /* 💌 CONSOLIDATED GLASS WINDOW HUB */
         .glass-hub {
@@ -72,6 +81,7 @@
 
         .hub-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
         .tab-trigger { 
+            font-family: 'Quicksand', sans-serif;
             background: var(--royal-white); border: 2px solid #ddd; color: #555; 
             padding: 12px; border-radius: 14px; cursor: pointer; font-weight: bold; 
             transition: all 0.3s ease; font-size: 0.95em; 
@@ -83,7 +93,7 @@
         .tab-trigger.active-goals { color: white; background: #38b000; border-color: #38b000; box-shadow: 0 4px 12px rgba(56, 176, 0, 0.3); }
         .tab-trigger.active-playlist { color: white; background: #ffaa00; border-color: #ffaa00; box-shadow: 0 4px 12px rgba(255, 170, 0, 0.3); }
 
-        .display-window { min-height: 100px; font-weight: 500; font-size: 1.2em; line-height: 1.6; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        .display-window { min-height: 100px; font-weight: 700; font-size: 1.25em; line-height: 1.6; display: flex; align-items: center; justify-content: center; padding: 10px; }
 
         /* Dynamic Quiz Step Containers */
         .interactive-quiz-step {
@@ -104,11 +114,15 @@
         .question-card label { display: block; font-weight: bold; font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
         
         .question-card input, .question-card textarea {
-            width: 100%; padding: 14px; border-radius: 14px; border: 2px solid #ccc; box-sizing: border-box; font-size: 1.05em; outline: none; transition: 0.3s; font-family: inherit;
+            font-family: 'Quicksand', sans-serif;
+            width: 100%; padding: 14px; border-radius: 14px; border: 2px solid #ccc; box-sizing: border-box; font-size: 1.05em; outline: none; transition: 0.3s;
         }
 
+        /* Typography Highlights */
+        .script-heading { font-family: 'Dancing Script', cursive; font-size: 2.6em; margin: 0 0 10px; }
+
         /* Dynamic System Colors */
-        .btn { padding: 12px 32px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; outline: none; }
+        .btn { font-family: 'Quicksand', sans-serif; padding: 12px 32px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; outline: none; }
         .btn-theme { background: var(--theme-accent); color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
         .btn-theme:hover { transform: scale(1.03); }
         
@@ -131,9 +145,9 @@
 
     <div id="proposal-overlay">
         <div class="proposal-box">
-            <h2 style="color: #0077b6; margin: 0 0 10px;">To Maryann, 🌹</h2>
+            <h2 class="script-heading" style="color: #0077b6;">To Maryann, 🌹</h2>
             <h3 style="font-size: 1.4em; color: var(--text-dark); margin-bottom: 30px;">
-                Will you be My girlfriend?<br><span style="font-size: 0.8em; color: #4361ee;">- Mickey</span>
+                Will you be My girlfriend?<br><span style="font-size: 0.9em; color: #4361ee; font-family: 'Dancing Script', cursive;">- Mickey</span>
             </h3>
             <div style="display: flex; justify-content: center; gap: 30px; position: relative; height: 50px;">
                 <button class="btn btn-theme" style="width: 100px; background: #0077b6;" onclick="acceptProposal(event)">Yes! 💙</button>
@@ -211,10 +225,10 @@
         </div>
 
         <div class="interactive-quiz-step" id="step-wrapper-4">
-            <div class="question-card" style="border: 3px solid #38b000; background: rgba(255, 255, 255, 0.98);">
-                <h2 style="color: #38b000; font-size: 2em; margin: 0 0 10px;">Sent to Mickey! 💖</h2>
-                <p style="font-size: 1.15em; line-height: 1.6; font-weight: 500; color: #222;">
-                    Thank you for sharing your thoughts, Maryann! Your beautiful responses just dropped directly into my inbox. I love learning new small details about you every single day.
+            <div class="question-card" id="success-card-layout" style="border: 3px solid #38b000; background: rgba(255, 255, 255, 0.98);">
+                <h2 id="success-headline" class="script-heading" style="color: #38b000;">Sent to Mickey! 💖</h2>
+                <p id="success-paragraph" style="font-size: 1.15em; line-height: 1.6; font-weight: 700; color: #222;">
+                    Placeholder Text
                 </p>
                 <div style="margin-top: 25px;">
                     <button class="btn btn-theme" style="background: #0077b6;" onclick="returnToHomeBase(event)">Back to Home Base ❤️</button>
@@ -276,6 +290,30 @@
             { text: "What is a food or dessert you want us to go try out very soon? 🍨", color: "#ff006e" }
         ];
 
+        // 👑 FRESH VARIABLE POOL FOR POPUP WRAP-UP SCREENS WITH HEAVY EMOJIS
+        const dynamicSuccessMessages = [
+            {
+                headline: "Sent to Mickey! 💌🌟✨",
+                text: "Yaaay! 🎉💃 You did it, Maryann! Your incredibly beautiful responses just flew straight into my inbox! 🚀📬 Honestly, learning these little custom details about you makes my heart skip beats! 💓🫣 I'm literally smiling like crazy over here! 😍 can't wait to read every single word! 👩‍❤️‍👨✨",
+                borderColor: "#ff7096"
+            },
+            {
+                headline: "Locked & Loaded! 🔐💞💎",
+                text: "Omg thank youuu! 😭🫶 Your sweet answers are safe with me now! 🗃️✨ Every time you answer these, it feels like adding another perfect chapter to our puzzle! 🧩💫 You are literally my absolute favorite person to discover! 🌍❤️ Stay beautiful, my queen! 👑✨🤭",
+                borderColor: "#7209b7"
+            },
+            {
+                headline: "Inbox Exploded! 💥❤️🔥",
+                text: "Alert! 🚨 Mickey's phone just lit up completely! 📱✨ Maryann has successfully deployed some pure sweetness directly to my screen! 🥰🛸 Thank you for sharing your thoughts with me, gorgeous! ✨🌾 Processing your answers with maximum love right now! 🧠❤️😘",
+                borderColor: "#38b000"
+            },
+            {
+                headline: "Mission Complete! 🏹💖🌸",
+                text: "Bullseye! 🎯💘 You just completed the mystery deck! 🃏✨ Your gorgeous insights have landed smoothly! 🛬💨 I absolutely adore how your mind works, Maryann! 🧠💭✨ Now go back out to the main hub and keep enjoying your special domain! 🏰💙✨",
+                borderColor: "#ffaa00"
+            }
+        ];
+
         const indices = { reminders: 0, reasons: 0, goals: 0, playlist: 0 };
         let activeTab = 'reminders';
         let currentFormStep = 0;
@@ -305,13 +343,11 @@
             if(activeTab === tabName) return;
             activeTab = tabName;
             
-            // Manage UI element tab state classes dynamically
             document.querySelectorAll('.tab-trigger').forEach(btn => {
                 btn.className = 'tab-trigger'; 
             });
             document.getElementById(`tab-${tabName}`).classList.add(`active-${tabName}`);
             
-            // Set matching header color accents instantly
             const targetedColor = messageDatabase[tabName].color;
             document.getElementById('main-title').innerText = messageDatabase[tabName].title;
             document.getElementById('main-title').style.color = targetedColor;
@@ -334,11 +370,9 @@
             document.getElementById('central-message-window').style.opacity = 0;
             document.getElementById('activation-deck').style.opacity = 0;
 
-            // Randomize and shuffle questions out of pool safely without duplicates
             const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
             activeQuizQuestions = shuffled.slice(0, 3);
 
-            // Dynamically build configurations for Steps 1, 2 and 3
             for(let i = 1; i <= 3; i++) {
                 const qConfig = activeQuizQuestions[i-1];
                 document.getElementById(`label-q${i}`).innerText = qConfig.text;
@@ -348,7 +382,6 @@
                 const processBtn = document.getElementById(`btn-q${i}`);
                 if (processBtn) processBtn.style.backgroundColor = qConfig.color;
                 
-                // Reset inputs safely from previous turns
                 document.getElementById(`input-q${i}`).value = '';
             }
 
@@ -418,7 +451,7 @@
                 toggleHubTab('reminders');
             }, 450);
             
-            createFloating(event.innerWidth/2, event.innerHeight/2);
+            createFloating(window.innerWidth/2, window.innerHeight/2);
         }
 
         /* Form Collector Interceptor */
@@ -430,7 +463,6 @@
             submitTrigger.innerText = "Sending to Mickey... 🔒";
             submitTrigger.disabled = true;
 
-            // Map question labels & answers to hidden dynamic tracking fields
             document.getElementById('hidden-q1-label').value = activeQuizQuestions[0].text;
             document.getElementById('hidden-q1-val').value = document.getElementById('input-q1').value;
             document.getElementById('hidden-q2-label').value = activeQuizQuestions[1].text;
@@ -447,6 +479,13 @@
                 });
 
                 if (response.ok) {
+                    // 🎲 SELECT A COMPLETELY RANDOM EMOJI CARD ON RE-ENTRY
+                    const randomPopup = dynamicSuccessMessages[Math.floor(Math.random() * dynamicSuccessMessages.length)];
+                    
+                    document.getElementById('success-headline').innerText = randomPopup.headline;
+                    document.getElementById('success-paragraph').innerText = randomPopup.text;
+                    document.getElementById('success-card-layout').style.borderColor = randomPopup.borderColor;
+
                     document.getElementById('step-wrapper-3').classList.remove('quiz-active');
                     changeBackground('bg-success');
                     setTimeout(() => {
