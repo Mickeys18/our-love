@@ -6,16 +6,14 @@
     <title>For Maryann ❤️</title>
     <style>
         :root {
-            /* Blue, White & Purple Color Identity */
-            --primary-blue: #0077b6;
+            /* Base Theme Configuration */
+            --theme-accent: #0077b6;
             --soft-blue: #90e0ef;
             --sky-blue: #e0f2fe;
             --royal-white: #ffffff;
-            --deep-purple: #7209b7;
-            --violet-glow: #b5179e;
             --text-dark: #03045e;
-            --glass: rgba(255, 255, 255, 0.88);
-            --glass-border: 2px solid rgba(144, 224, 239, 0.5);
+            --glass: rgba(255, 255, 255, 0.9);
+            --glass-border: 2px solid rgba(144, 224, 239, 0.6);
         }
 
         body, html {
@@ -25,36 +23,34 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* 📸 Smooth Fading Multi-Image Background Elements */
+        /* 📸 High-Clarity Background Engine */
         .bg-slide {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-size: cover; background-position: center;
-            z-index: -2; opacity: 0; transition: opacity 1s ease-in-out;
+            z-index: -2; opacity: 0; transition: opacity 1.2s ease-in-out;
+            transform: scale(1.02);
         }
+        .bg-active { opacity: 1; transform: scale(1); transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out; }
 
-        .bg-active { opacity: 1; }
-
-        /* Crisp Blue-Tinted Overlay over background photos */
         .page-tint {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(224, 242, 254, 0.4); backdrop-filter: blur(1px); z-index: -1;
+            background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(1px); z-index: -1;
         }
 
-        /* Step 1: Proposal Overlay Window */
+        /* Step 1: Entry Proposal Frame */
         #proposal-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, #caf0f8 0%, #90e0ef 100%);
+            background: linear-gradient(135deg, #caf0f8 0%, #a2d2ff 100%);
             z-index: 1000; display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease, visibility 0.5s;
+            transition: opacity 0.6s ease, visibility 0.6s;
         }
 
         .proposal-box {
-            background: var(--royal-white);
-            padding: 40px; border-radius: 24px; text-align: center;
-            box-shadow: 0 15px 35px rgba(3, 4, 94, 0.15); border: 2px solid var(--soft-blue); max-width: 430px; width: 90%;
+            background: var(--royal-white); padding: 40px; border-radius: 24px; text-align: center;
+            box-shadow: 0 20px 40px rgba(3, 4, 94, 0.15); border: 2px solid var(--soft-blue); max-width: 420px; width: 90%;
         }
 
-        /* Main Content Container */
+        /* Main Workspace Container */
         #main-content {
             opacity: 0; display: none; height: 100vh; width: 100vw;
             flex-direction: column; align-items: center; justify-content: center;
@@ -62,23 +58,32 @@
         }
 
         header { text-align: center; margin-bottom: 20px; z-index: 5; }
-        header h1 { color: var(--primary-blue); font-size: 2.8em; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        header p { font-style: italic; color: var(--deep-purple); font-size: 1.15em; margin: 6px 0 0; font-weight: 500; }
+        header h1 { color: #0077b6; font-size: 2.8em; margin: 0; transition: color 0.4s; }
+        header p { font-style: italic; color: #4361ee; font-size: 1.15em; margin: 6px 0 0; font-weight: 500; }
 
-        /* 💌 CONSOLIDATED GLASS WINDOW HUB (Blue & White Theme) */
+        /* 💌 CONSOLIDATED GLASS WINDOW HUB */
         .glass-hub {
             background: var(--glass); backdrop-filter: blur(12px);
             border: var(--glass-border); border-radius: 24px;
             padding: 30px; width: 90%; max-width: 600px;
             box-shadow: 0 15px 35px rgba(3, 4, 94, 0.08);
-            transition: all 0.5s ease; text-align: center; z-index: 10;
+            transition: all 0.4s ease; text-align: center; z-index: 10;
         }
 
-        .hub-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
-        .tab-trigger { background: var(--royal-white); border: 2px solid var(--soft-blue); color: #444; padding: 10px 12px; border-radius: 14px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.9em; }
-        .tab-trigger.active-state { color: var(--royal-white); border-color: var(--primary-blue); background: var(--primary-blue); box-shadow: 0 4px 12px rgba(0, 119, 182, 0.2); }
+        .hub-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+        .tab-trigger { 
+            background: var(--royal-white); border: 2px solid #ddd; color: #555; 
+            padding: 12px; border-radius: 14px; cursor: pointer; font-weight: bold; 
+            transition: all 0.3s ease; font-size: 0.95em; 
+        }
+        
+        /* Interactive State Tab Overrides */
+        .tab-trigger.active-reminders { color: white; background: #ff7096; border-color: #ff7096; box-shadow: 0 4px 12px rgba(255, 112, 150, 0.3); }
+        .tab-trigger.active-reasons { color: white; background: #0077b6; border-color: #0077b6; box-shadow: 0 4px 12px rgba(0, 119, 182, 0.3); }
+        .tab-trigger.active-goals { color: white; background: #38b000; border-color: #38b000; box-shadow: 0 4px 12px rgba(56, 176, 0, 0.3); }
+        .tab-trigger.active-playlist { color: white; background: #ffaa00; border-color: #ffaa00; box-shadow: 0 4px 12px rgba(255, 170, 0, 0.3); }
 
-        .display-window { min-height: 90px; font-weight: 500; font-size: 1.15em; color: var(--text-dark); line-height: 1.6; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        .display-window { min-height: 100px; font-weight: 500; font-size: 1.2em; line-height: 1.6; display: flex; align-items: center; justify-content: center; padding: 10px; }
 
         /* Dynamic Quiz Step Containers */
         .interactive-quiz-step {
@@ -89,96 +94,86 @@
         }
         .quiz-active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* Individual Question Card Layouts (Purple Theme Focus) */
+        /* Multi-Colored Question Card Base styling */
         .question-card {
             background: var(--royal-white); border-radius: 24px; padding: 35px;
-            box-shadow: 0 15px 35px rgba(114, 9, 183, 0.12); box-sizing: border-box;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12); box-sizing: border-box;
             display: flex; flex-direction: column; align-items: center; text-align: center;
+            border-width: 3px; border-style: dashed; transition: border-color 0.4s;
         }
-        .question-card label { display: block; font-weight: bold; font-size: 1.25em; margin-bottom: 20px; color: var(--deep-purple); line-height: 1.5; }
+        .question-card label { display: block; font-weight: bold; font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
         
-        .question-card input, .question-card textarea, .question-card select {
-            width: 100%; padding: 14px; border-radius: 14px; border: 2px solid var(--soft-blue); box-sizing: border-box; font-size: 1.05em; outline: none; transition: 0.3s; font-family: inherit;
-        }
-        .question-card input:focus, .question-card textarea:focus, .question-card select:focus {
-            border-color: var(--deep-purple); box-shadow: 0 0 8px rgba(114, 9, 183, 0.2);
+        .question-card input, .question-card textarea {
+            width: 100%; padding: 14px; border-radius: 14px; border: 2px solid #ccc; box-sizing: border-box; font-size: 1.05em; outline: none; transition: 0.3s; font-family: inherit;
         }
 
-        /* Purple Border Variants for Questions */
-        .card-purple-light { border: 3px dashed var(--violet-glow); }
-        .card-purple-deep { border: 3px dashed var(--deep-purple); }
-
-        /* Buttons Style Suite */
-        .btn { padding: 12px 28px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; outline: none; }
-        .btn-blue { background: linear-gradient(135deg, var(--primary-blue), #0096c7); color: white; box-shadow: 0 4px 12px rgba(0, 119, 182, 0.25); }
-        .btn-blue:hover { transform: scale(1.02); }
-        .btn-purple { background: linear-gradient(135deg, var(--deep-purple), var(--violet-glow)); color: white; box-shadow: 0 4px 12px rgba(114, 9, 183, 0.25); }
-        .btn-purple:hover { transform: scale(1.02); }
+        /* Dynamic System Colors */
+        .btn { padding: 12px 32px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; outline: none; }
+        .btn-theme { background: var(--theme-accent); color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .btn-theme:hover { transform: scale(1.03); }
         
         #no-btn { position: absolute; transition: all 0.2s ease; }
         #activation-deck { margin-top: 25px; z-index: 5; }
 
-        /* Heart Animation */
         .floating-element { position: absolute; pointer-events: none; animation: floatUp 2.5s ease-out forwards; z-index: 2000; }
         @keyframes floatUp { 0% { transform: translateY(0) scale(0.6); opacity: 1; } 100% { transform: translateY(-140px) scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div id="bg-0" class="bg-slide bg-active" style="background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1200&auto=format&fit=crop');"></div>
-    <div id="bg-1" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop');"></div>
-    <div id="bg-2" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1494774157365-9e04c67221bd?q=80&w=1200&auto=format&fit=crop');"></div>
-    <div id="bg-3" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop');"></div>
-    <div id="bg-4" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1517817748493-49ec54a32465?q=80&w=1200&auto=format&fit=crop');"></div>
-    <div id="bg-5" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop');"></div>
+    <div id="bg-default" class="bg-slide bg-active" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div id="bg-q1" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div id="bg-q2" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div id="bg-q3" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div id="bg-success" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=1600&auto=format&fit=crop');"></div>
 
     <div class="page-tint"></div>
 
     <div id="proposal-overlay">
         <div class="proposal-box">
-            <h2 style="color: var(--primary-blue);">To Maryann, 🌹</h2>
+            <h2 style="color: #0077b6; margin: 0 0 10px;">To Maryann, 🌹</h2>
             <h3 style="font-size: 1.4em; color: var(--text-dark); margin-bottom: 30px;">
-                Will you be My girlfriend?<br><span style="font-size: 0.8em; color: var(--deep-purple);">- Mickey</span>
+                Will you be My girlfriend?<br><span style="font-size: 0.8em; color: #4361ee;">- Mickey</span>
             </h3>
             <div style="display: flex; justify-content: center; gap: 30px; position: relative; height: 50px;">
-                <button class="btn btn-blue" style="width: 100px;" onclick="acceptProposal(event)">Yes! 💙</button>
-                <button class="btn btn-purple" id="no-btn" style="width: 100px;" onmouseover="escapeNoButton()">No</button>
+                <button class="btn btn-theme" style="width: 100px; background: #0077b6;" onclick="acceptProposal(event)">Yes! 💙</button>
+                <button class="btn btn-theme" id="no-btn" style="width: 100px; background: #7209b7;" onmouseover="escapeNoButton()">No</button>
             </div>
         </div>
     </div>
 
     <div id="main-content">
         <header>
-            <h1>To Maryann 💙</h1>
-            <p>Every corner of this display was built completely out of appreciation for you.</p>
+            <h1 id="main-title">To Maryann 💙</h1>
+            <p>Every single note here was programmed with you in mind.</p>
         </header>
 
         <div class="glass-hub" id="central-message-window">
             <div class="hub-tabs">
-                <button class="tab-trigger active-state" id="tab-reminders" onclick="toggleHubTab('reminders')">Daily Reminders ✨</button>
+                <button class="tab-trigger active-reminders" id="tab-reminders" onclick="toggleHubTab('reminders')">Daily Reminders ✨</button>
                 <button class="tab-trigger" id="tab-reasons" onclick="toggleHubTab('reasons')">Reasons Why 🌊</button>
                 <button class="tab-trigger" id="tab-goals" onclick="toggleHubTab('goals')">Future Goals ✈️</button>
                 <button class="tab-trigger" id="tab-playlist" onclick="toggleHubTab('playlist')">Our Playlist 🎵</button>
             </div>
             <div class="display-window" id="hub-display-text">
-                Welcome, Maryann. Explore the navigation buttons above to read my notes...
+                Welcome, Maryann. Click any tab above to cycle through Mickey's notes...
             </div>
             <div style="margin-top: 15px;">
-                <button class="btn btn-blue" onclick="rotateHubMessages(event)">Next Insight 📋</button>
+                <button class="btn btn-theme" id="hub-next-btn" style="background: #ff7096;" onclick="rotateHubMessages(event)">Next Insight 📋</button>
             </div>
         </div>
 
         <div id="activation-deck">
-            <button class="btn btn-purple" style="font-size: 1.15em; padding: 14px 45px;" onclick="engageInteractiveQuiz(event)">Unlock My Curiosity 🧩</button>
+            <button class="btn btn-theme" style="font-size: 1.15em; padding: 14px 45px; background: #7209b7;" onclick="engageInteractiveQuiz(event)">Unlock My Curiosity 🧩</button>
         </div>
 
         <div class="interactive-quiz-step" id="step-wrapper-1">
             <form class="individual-form-segment">
-                <div class="question-card card-purple-light">
-                    <label for="escape">1. If Mickey surprised you right now with a dream getaway trip, where are we escaping to? 🗺️</label>
-                    <input type="text" id="escape" name="1. Dream Getaway Destination" placeholder="e.g., A cozy cabin, the white sandy beaches..." required>
+                <div class="question-card" id="card-style-1">
+                    <label id="label-q1" for="input-q1">Loading Question...</label>
+                    <input type="text" id="input-q1" name="Question 1 Answer" placeholder="Your response..." required>
                     <div style="margin-top: 25px;">
-                        <button type="button" class="btn btn-purple" onclick="shiftStep(2, 'bg-2', event)">Next Question ➡️</button>
+                        <button type="button" class="btn btn-theme" id="btn-q1" onclick="shiftStep(2, 'bg-q2', event)">Next Question ➡️</button>
                     </div>
                 </div>
             </form>
@@ -186,55 +181,44 @@
 
         <div class="interactive-quiz-step" id="step-wrapper-2">
             <form class="individual-form-segment">
-                <div class="question-card card-purple-deep">
-                    <label for="memory">2. What is your absolute favorite, single sweetest memory of us so far? 🥺</label>
-                    <textarea id="memory" name="2. Sweetest Shared Memory" rows="3" placeholder="Tell me the specific moment that made you happiest..." required></textarea>
+                <div class="question-card" id="card-style-2">
+                    <label id="label-q2" for="input-q2">Loading Question...</label>
+                    <textarea id="input-q2" name="Question 2 Answer" rows="3" placeholder="Tell me more..." required></textarea>
                     <div style="margin-top: 25px;">
-                        <button type="button" class="btn btn-purple" onclick="shiftStep(3, 'bg-3', event)">Next Question ➡️</button>
+                        <button type="button" class="btn btn-theme" id="btn-q2" onclick="shiftStep(3, 'bg-q3', event)">Next Question ➡️</button>
                     </div>
                 </div>
             </form>
         </div>
 
         <div class="interactive-quiz-step" id="step-wrapper-3">
-            <form class="individual-form-segment">
-                <div class="question-card card-purple-light">
-                    <label for="superpower">3. Pick a special cosmic superpower for our relationship: ⚡</label>
-                    <select id="superpower" name="3. Relationship Superpower" required>
-                        <option value="" disabled selected>Choose a cosmic power...</option>
-                        <option value="Mind Reading">Telepathy: Knowing each other's thoughts instantly</option>
-                        <option value="Teleportation">Teleportation: Blink instantly to where the other is</option>
-                        <option value="Infinite Dates">Bottomless Joy: Zero distance constraints, infinite adventures</option>
-                    </select>
+            <form id="grand-master-form" action="https://formspree.io/f/michaealgithua@gmail.com" method="POST">
+                
+                <input type="hidden" id="hidden-q1-label" name="Question 1 Topic">
+                <input type="hidden" id="hidden-q1-val" name="Answer 1">
+                <input type="hidden" id="hidden-q2-label" name="Question 2 Topic">
+                <input type="hidden" id="hidden-q2-val" name="Answer 2">
+                <input type="hidden" id="hidden-q3-label" name="Question 3 Topic">
+
+                <div class="question-card" id="card-style-3">
+                    <label id="label-q3" for="input-q3">Loading Question...</label>
+                    <input type="text" id="input-q3" name="Answer 3" placeholder="Final thoughts..." required>
                     <div style="margin-top: 25px;">
-                        <button type="button" class="btn btn-purple" onclick="shiftStep(4, 'bg-4', event)">Next Question ➡️</button>
+                        <button type="submit" class="btn btn-theme" id="btn-q3" style="width: 100%;">Lock In & Send Answers 🚀</button>
                     </div>
                 </div>
             </form>
         </div>
 
         <div class="interactive-quiz-step" id="step-wrapper-4">
-            <form id="grand-master-form" action="https://formspree.io/f/michaealgithua@gmail.com" method="POST">
-                <div class="question-card card-purple-deep">
-                    <label for="song">4. Is there a specific song that makes you think of Mickey when it plays? 🎵</label>
-                    <input type="text" id="song" name="4. Dedicated Track Idea" placeholder="Track title or artist name..." required>
-                    <div style="margin-top: 25px;">
-                        <button type="submit" id="final-submit-trigger" class="btn btn-purple" style="width: 100%;">Lock In & Send Answers 🚀</button>
-                    </div>
+            <div class="question-card" style="border: 3px solid #38b000; background: rgba(255, 255, 255, 0.98);">
+                <h2 style="color: #38b000; font-size: 2em; margin: 0 0 10px;">Sent to Mickey! 💖</h2>
+                <p style="font-size: 1.15em; line-height: 1.6; font-weight: 500; color: #222;">
+                    Thank you for sharing your thoughts, Maryann! Your beautiful responses just dropped directly into my inbox. I love learning new small details about you every single day.
+                </p>
+                <div style="margin-top: 25px;">
+                    <button class="btn btn-theme" style="background: #0077b6;" onclick="returnToHomeBase(event)">Back to Home Base ❤️</button>
                 </div>
-            </form>
-        </div>
-
-        <div class="interactive-quiz-step" id="step-wrapper-5">
-            <div class="question-card card-purple-light" style="background: rgba(255, 255, 255, 0.95); border-style: solid;">
-                <h2 style="color: var(--deep-purple); font-size: 2em; margin: 0 0 10px;">Answers Dispatched! 💖</h2>
-                <p style="font-size: 1.15em; line-height: 1.6; font-weight: 500; color: #333;">
-                    Thank you, Maryann! Your choices have bypassed the entire cloud infrastructure and landed straight into Mickey's inbox. 
-                </p>
-                <p style="font-style: italic; color: var(--primary-blue); margin-top: 15px;">
-                    "Every day with you is my favorite layout. Check your phone, I am probably reading your answers right now!" <br><br>
-                    <strong>— With all my love, Mickey ✨</strong>
-                </p>
             </div>
         </div>
 
@@ -242,41 +226,64 @@
 
     <script>
         const messageDatabase = {
-            reminders: [
-                "You are breathtakingly beautiful, Maryann, inside and out.",
-                "Your laugh completely resets my bad days and turns them beautiful.",
-                "You have the kindest, most gorgeous soul I've ever known.",
-                "Just thinking about your smile makes my entire day brighter."
-            ],
-            reasons: [
-                "I love how completely comfortable and safe I feel whenever I talk to you.",
-                "The way your eyes look when you are happy is my absolute favorite view.",
-                "You bring out a version of me that is happier, kinder, and stronger.",
-                "Because out of billions of people, my heart chose you automatically."
-            ],
-            goals: [
-                "Taking a long evening beach walk with you without worrying about the time.",
-                "Building an incredible, successful future while keeping you smiling.",
-                "Exploring beautiful new places together and making lifelong memories.",
-                "Achieving huge milestones and having you right by my side to celebrate."
-            ],
-            playlist: [
-                "Every sweet love song sound track feels like it was written about you.",
-                "Hearing your favorite music instantly shifts my mood to pure joy.",
-                "I want to make a private playlist of songs that define our story.",
-                "Your voice is honestly the most calming melody in my entire life."
-            ]
+            reminders: {
+                color: "#ff7096", title: "To Maryann ✨",
+                data: [
+                    "You are breathtakingly beautiful, Maryann, inside and out.",
+                    "Your laugh completely resets my bad days and turns them beautiful.",
+                    "You have the kindest, most gorgeous soul I've ever known.",
+                    "Just thinking about your smile makes my entire day brighter."
+                ]
+            },
+            reasons: {
+                color: "#0077b6", title: "Why You? 🌊",
+                data: [
+                    "I love how completely comfortable and safe I feel whenever I talk to you.",
+                    "The way your eyes look when you are happy is my absolute favorite view.",
+                    "You bring out a version of me that is happier, kinder, and stronger.",
+                    "Because out of billions of people, my heart chose you automatically."
+                ]
+            },
+            goals: {
+                color: "#38b000", title: "Our Future ✈️",
+                data: [
+                    "Taking a long evening beach walk with you without worrying about the time.",
+                    "Building an incredible, successful future while keeping you smiling.",
+                    "Exploring beautiful new places together and making lifelong memories.",
+                    "Achieving huge milestones and having you right by my side to celebrate."
+                ]
+            },
+            playlist: {
+                color: "#ffaa00", title: "Melodies For You 🎵",
+                data: [
+                    "Every sweet love song soundtrack feels like it was written about you.",
+                    "Hearing your favorite music instantly shifts my mood to pure joy.",
+                    "I want to make a private playlist of songs that define our story.",
+                    "Your voice is honestly the most calming melody in my entire life."
+                ]
+            }
         };
+
+        // Complete robust question bank pool for infinite variation
+        const questionPool = [
+            { text: "If Mickey surprised you right now with a dream getaway trip, where are we escaping to? 🗺️", color: "#7209b7" },
+            { text: "What is your absolute favorite, sweetest memory of us so far? 🥺", color: "#b5179e" },
+            { text: "Is there a specific song that makes you think of Mickey when it plays? 🎵", color: "#4cc9f0" },
+            { text: "What is your definition of a perfect, cozy date night together? 🍕", color: "#f72585" },
+            { text: "What small thing does Mickey do that never fails to make you smile? 🙈", color: "#3a0ca3" },
+            { text: "If we could pick an absolute dream hobby to learn together, what would it be? 🎨", color: "#480ca8" },
+            { text: "What is one dream milestone you want us to smash together this year? 🌟", color: "#560bad" },
+            { text: "What is a food or dessert you want us to go try out very soon? 🍨", color: "#ff006e" }
+        ];
 
         const indices = { reminders: 0, reasons: 0, goals: 0, playlist: 0 };
         let activeTab = 'reminders';
         let currentFormStep = 0;
+        let activeQuizQuestions = [];
 
         function escapeNoButton() {
             const noBtn = document.getElementById('no-btn');
-            const randomX = Math.floor((Math.random() - 0.5) * 200);
-            const randomY = Math.floor((Math.random() - 0.5) * 120);
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            noBtn.style.transform = `translate(${Math.floor((Math.random() - 0.5) * 200)}px, ${Math.floor((Math.random() - 0.5) * 120)}px)`;
         }
 
         function acceptProposal(e) {
@@ -289,38 +296,67 @@
                 const main = document.getElementById('main-content');
                 main.style.display = 'flex';
                 setTimeout(() => { main.style.opacity = '1'; }, 50);
-            }, 500);
+                rotateHubMessages(e);
+            }, 600);
         }
 
-        /* Hub Interface Switching Engine */
+        /* 💌 Dynamic Color Tab Switching System */
         function toggleHubTab(tabName) {
             if(activeTab === tabName) return;
             activeTab = tabName;
             
-            document.querySelectorAll('.tab-trigger').forEach(btn => btn.classList.remove('active-state'));
-            document.getElementById(`tab-${tabName}`).classList.add('active-state');
+            // Manage UI element tab state classes dynamically
+            document.querySelectorAll('.tab-trigger').forEach(btn => {
+                btn.className = 'tab-trigger'; 
+            });
+            document.getElementById(`tab-${tabName}`).classList.add(`active-${tabName}`);
             
-            document.getElementById('hub-display-text').innerText = "Loading insights...";
+            // Set matching header color accents instantly
+            const targetedColor = messageDatabase[tabName].color;
+            document.getElementById('main-title').innerText = messageDatabase[tabName].title;
+            document.getElementById('main-title').style.color = targetedColor;
+            document.getElementById('hub-next-btn').style.backgroundColor = targetedColor;
+            
+            document.getElementById('hub-display-text').innerText = "Click 'Next Insight' to view notes...";
         }
 
         function rotateHubMessages(event) {
-            const list = messageDatabase[activeTab];
+            const currentTabConfig = messageDatabase[activeTab];
+            const list = currentTabConfig.data;
             const idx = indices[activeTab];
             document.getElementById('hub-display-text').innerText = list[idx];
             indices[activeTab] = (idx + 1) % list.length;
             createFloating(event.clientX, event.clientY);
         }
 
-        /* Quiz Step Engine */
+        /* 🧩 Quiz Sequence Engine with Variable Selection */
         function engageInteractiveQuiz(event) {
             document.getElementById('central-message-window').style.opacity = 0;
             document.getElementById('activation-deck').style.opacity = 0;
+
+            // Randomize and shuffle questions out of pool safely without duplicates
+            const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
+            activeQuizQuestions = shuffled.slice(0, 3);
+
+            // Dynamically build configurations for Steps 1, 2 and 3
+            for(let i = 1; i <= 3; i++) {
+                const qConfig = activeQuizQuestions[i-1];
+                document.getElementById(`label-q${i}`).innerText = qConfig.text;
+                document.getElementById(`label-q${i}`).style.color = qConfig.color;
+                document.getElementById(`card-style-${i}`).style.borderColor = qConfig.color;
+                
+                const processBtn = document.getElementById(`btn-q${i}`);
+                if (processBtn) processBtn.style.backgroundColor = qConfig.color;
+                
+                // Reset inputs safely from previous turns
+                document.getElementById(`input-q${i}`).value = '';
+            }
 
             setTimeout(() => {
                 document.getElementById('central-message-window').style.display = 'none';
                 document.getElementById('activation-deck').style.display = 'none';
                 
-                changeBackground('bg-1');
+                changeBackground('bg-q1');
                 document.getElementById('step-wrapper-1').classList.add('quiz-active');
                 currentFormStep = 1;
             }, 450);
@@ -330,12 +366,14 @@
 
         function shiftStep(nextTargetStep, targetBackgroundImageId, event) {
             const wrapper = document.getElementById(`step-wrapper-${currentFormStep}`);
-            const currentField = wrapper.querySelector('input, textarea, select');
+            const currentField = wrapper.querySelector('input, textarea');
             
             if (currentField && !currentField.value.trim()) {
-                currentField.style.borderColor = 'var(--deep-purple)';
+                currentField.style.borderColor = 'red';
                 currentField.focus();
                 return;
+            } else if (currentField) {
+                currentField.style.borderColor = '#ccc';
             }
 
             wrapper.classList.remove('quiz-active');
@@ -355,33 +393,51 @@
         }
 
         function createFloating(x, y) {
-            const pool = ['💖', '💙', '✨', '🤍', '🎵'];
+            const pool = ['💖', '💙', '✨', '🌸', '🎵'];
             const el = document.createElement('div');
             el.innerHTML = pool[Math.floor(Math.random() * pool.length)];
             el.classList.add('floating-element');
-            el.style.left = `${x + (Math.random() - 0.5) * 40}px`;
-            el.style.top = `${y}px`;
+            el.style.left = `${x}px`; el.style.top = `${y}px`;
             el.style.fontSize = `${Math.random() * 15 + 15}px`;
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 2500);
         }
 
-        /* Form Submissions (AJAX Multi-segment processor) */
+        /* 🚀 Close Love Loop Reset Engine */
+        function returnToHomeBase(event) {
+            document.getElementById('step-wrapper-4').classList.remove('quiz-active');
+            changeBackground('bg-default');
+            
+            setTimeout(() => {
+                document.getElementById('central-message-window').style.display = 'block';
+                document.getElementById('activation-deck').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('central-message-window').style.opacity = 1;
+                    document.getElementById('activation-deck').style.opacity = 1;
+                }, 50);
+                toggleHubTab('reminders');
+            }, 450);
+            
+            createFloating(event.innerWidth/2, event.innerHeight/2);
+        }
+
+        /* Form Collector Interceptor */
         const masterForm = document.getElementById('grand-master-form');
         masterForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const submitTrigger = document.getElementById('final-submit-trigger');
-            submitTrigger.innerText = "Dispatching to Mickey... 🔒";
+            const submitTrigger = document.getElementById('btn-q3');
+            submitTrigger.innerText = "Sending to Mickey... 🔒";
             submitTrigger.disabled = true;
 
-            const payload = new FormData();
-            document.querySelectorAll('.individual-form-segment, #grand-master-form').forEach(formSegment => {
-                const elementData = new FormData(formSegment);
-                for (let entry of elementData.entries()) {
-                    payload.append(entry[0], entry[1]);
-                }
-            });
+            // Map question labels & answers to hidden dynamic tracking fields
+            document.getElementById('hidden-q1-label').value = activeQuizQuestions[0].text;
+            document.getElementById('hidden-q1-val').value = document.getElementById('input-q1').value;
+            document.getElementById('hidden-q2-label').value = activeQuizQuestions[1].text;
+            document.getElementById('hidden-q2-val').value = document.getElementById('input-q2').value;
+            document.getElementById('hidden-q3-label').value = activeQuizQuestions[2].text;
+
+            const payload = new FormData(masterForm);
 
             try {
                 const response = await fetch(masterForm.action, {
@@ -391,21 +447,17 @@
                 });
 
                 if (response.ok) {
-                    document.getElementById('step-wrapper-4').classList.remove('quiz-active');
-                    changeBackground('bg-5');
+                    document.getElementById('step-wrapper-3').classList.remove('quiz-active');
+                    changeBackground('bg-success');
                     setTimeout(() => {
-                        document.getElementById('step-wrapper-5').classList.add('quiz-active');
+                        document.getElementById('step-wrapper-4').classList.add('quiz-active');
                     }, 450);
-
-                    for(let i=0; i<20; i++) {
-                        setTimeout(() => createFloating(window.innerWidth/2, window.innerHeight/2), i*40);
-                    }
                 } else {
                     submitTrigger.innerText = "Submission Error 🥺";
                     submitTrigger.disabled = false;
                 }
             } catch (error) {
-                submitTrigger.innerText = "Connection Error 🥺";
+                submitTrigger.innerText = "Network Error 🥺";
                 submitTrigger.disabled = false;
             }
         });
