@@ -6,237 +6,235 @@
     <title>For Maryann ❤️</title>
     <style>
         :root {
-            /* Upgraded Luxury Palette */
-            --bg-overlay: rgba(255, 229, 236, 0.85); /* Pinkish transparency */
-            --primary-pink: #ff85a2;
-            --dark-pink: #f15bb5;
-            --soft-blue: #a2d2ff;
-            --deep-blue: #0077b6;
-            --text-purple: #4a0e4e;
-            --glass: rgba(255, 255, 255, 0.7);
-            --glass-border: 2px solid rgba(255, 255, 255, 0.6);
+            /* Blue, White & Purple Color Identity */
+            --primary-blue: #0077b6;
+            --soft-blue: #90e0ef;
+            --sky-blue: #e0f2fe;
+            --royal-white: #ffffff;
+            --deep-purple: #7209b7;
+            --violet-glow: #b5179e;
+            --text-dark: #03045e;
+            --glass: rgba(255, 255, 255, 0.88);
+            --glass-border: 2px solid rgba(144, 224, 239, 0.5);
         }
 
         body, html {
             margin: 0; padding: 0; height: 100vh; width: 100vw;
             font-family: 'Segoe UI', Roboto, sans-serif;
-            color: var(--text-purple);
-            overflow: hidden; /* Lock scroll, use overlay layout */
+            color: var(--text-dark); overflow: hidden;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* 🎬 Dynamic Video Background */
-        .video-background {
+        /* 📸 Smooth Fading Multi-Image Background Elements */
+        .bg-slide {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -2; overflow: hidden;
+            background-size: cover; background-position: center;
+            z-index: -2; opacity: 0; transition: opacity 1s ease-in-out;
         }
 
-        .video-background iframe {
-            position: absolute; top: 50%; left: 50%;
-            width: 100vw; height: 100vh; transform: translate(-50%, -50%);
-            object-fit: cover; /* Important for dynamic fitting */
-            pointer-events: none; /* Can't interact with background video */
-        }
+        .bg-active { opacity: 1; }
 
-        /* Full Screen Soft-Pink Overlay over video */
-        .page-overlay {
+        /* Crisp Blue-Tinted Overlay over background photos */
+        .page-tint {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: var(--bg-overlay); z-index: -1;
+            background: rgba(224, 242, 254, 0.4); backdrop-filter: blur(1px); z-index: -1;
         }
 
-        /* Proposal Overlay Window */
+        /* Step 1: Proposal Overlay Window */
         #proposal-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, #ffccd5 0%, #bde0fe 100%);
+            background: linear-gradient(135deg, #caf0f8 0%, #90e0ef 100%);
             z-index: 1000; display: flex; justify-content: center; align-items: center;
             transition: opacity 0.5s ease, visibility 0.5s;
         }
 
         .proposal-box {
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px);
+            background: var(--royal-white);
             padding: 40px; border-radius: 24px; text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 2px solid white; max-width: 450px; width: 90%;
+            box-shadow: 0 15px 35px rgba(3, 4, 94, 0.15); border: 2px solid var(--soft-blue); max-width: 430px; width: 90%;
         }
 
         /* Main Content Container */
         #main-content {
             opacity: 0; display: none; height: 100vh; width: 100vw;
             flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.8s ease; position: relative;
         }
 
-        header { margin-bottom: 30px; text-align: center; }
-        header h1 { color: var(--dark-pink); font-size: 2.8em; margin: 0; }
-        header p { font-style: italic; color: var(--deep-blue); font-size: 1.1em; margin: 5px 0 0; }
+        header { text-align: center; margin-bottom: 20px; z-index: 5; }
+        header h1 { color: var(--primary-blue); font-size: 2.8em; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        header p { font-style: italic; color: var(--deep-purple); font-size: 1.15em; margin: 6px 0 0; font-weight: 500; }
 
-        /* 💌 CONSOLIDATED GLASS MESSAGING HUB */
-        .glass-window {
-            background: var(--glass); backdrop-filter: blur(10px);
-            border: var(--glass-border); border-radius: 25px;
+        /* 💌 CONSOLIDATED GLASS WINDOW HUB (Blue & White Theme) */
+        .glass-hub {
+            background: var(--glass); backdrop-filter: blur(12px);
+            border: var(--glass-border); border-radius: 24px;
             padding: 30px; width: 90%; max-width: 600px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-            transition: all 0.5s ease; position: absolute; z-index: 10;
+            box-shadow: 0 15px 35px rgba(3, 4, 94, 0.08);
+            transition: all 0.5s ease; text-align: center; z-index: 10;
         }
 
-        .window-header { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
-        .tab-btn { background: none; border: 2px solid transparent; color: #666; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .tab-btn.active-tab { color: var(--dark-pink); border-color: var(--dark-pink); background: rgba(241, 91, 181, 0.1); }
+        .hub-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+        .tab-trigger { background: var(--royal-white); border: 2px solid var(--soft-blue); color: #444; padding: 10px 12px; border-radius: 14px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.9em; }
+        .tab-trigger.active-state { color: var(--royal-white); border-color: var(--primary-blue); background: var(--primary-blue); box-shadow: 0 4px 12px rgba(0, 119, 182, 0.2); }
 
-        .message-content { min-height: 120px; font-weight: 500; font-size: 1.15em; color: #444; line-height: 1.6; text-align: center; }
+        .display-window { min-height: 90px; font-weight: 500; font-size: 1.15em; color: var(--text-dark); line-height: 1.6; display: flex; align-items: center; justify-content: center; padding: 10px; }
 
-        /* General Buttons Styling */
-        .btn { padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; outline: none;}
-        .btn-pink { background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink)); color: white; box-shadow: 0 4px 12px rgba(241, 91, 181, 0.3); }
-        .btn-pink:hover { transform: scale(1.03); }
-        .btn-blue { background: linear-gradient(135deg, var(--soft-blue), #4ea8de); color: white; }
-        #no-btn { position: absolute; transition: all 0.2s ease; }
-
-        /* Unlock Curiosity Button below Message window */
-        #quiz-start-container { margin-top: 30px; position: relative; z-index: 5; }
-
-        /* 🎯 MULTI-STEP QUIZ SEQUENCE CONTAINERS */
-        .quiz-sequence-container {
+        /* Dynamic Quiz Step Containers */
+        .interactive-quiz-step {
             position: absolute; display: none; opacity: 0;
-            width: 90%; max-width: 600px; z-index: 15;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            transform: translateY(20px);
+            width: 90%; max-width: 550px; z-index: 15;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateY(15px);
         }
-
         .quiz-active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* Base styling for Question Cards */
+        /* Individual Question Card Layouts (Purple Theme Focus) */
         .question-card {
-            background: white; border-radius: 25px; padding: 35px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border: 3px dashed var(--primary-pink);
-            display: flex; flex-direction: column; align-items: center;
+            background: var(--royal-white); border-radius: 24px; padding: 35px;
+            box-shadow: 0 15px 35px rgba(114, 9, 183, 0.12); box-sizing: border-box;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
         }
-
-        .question-card label { display: block; font-weight: bold; font-size: 1.25em; margin-bottom: 20px; color: var(--text-purple); text-align: center;}
+        .question-card label { display: block; font-weight: bold; font-size: 1.25em; margin-bottom: 20px; color: var(--deep-purple); line-height: 1.5; }
+        
         .question-card input, .question-card textarea, .question-card select {
-            width: 100%; padding: 14px; border-radius: 12px; border: 2px solid var(--soft-blue); box-sizing: border-box; font-size: 1.1em;
-            outline: none; transition: 0.3s;
+            width: 100%; padding: 14px; border-radius: 14px; border: 2px solid var(--soft-blue); box-sizing: border-box; font-size: 1.05em; outline: none; transition: 0.3s; font-family: inherit;
         }
-        .question-card input:focus, .question-card textarea:focus { border-color: var(--dark-pink); }
-
-        /* Step colors override */
-        /* Step 1: Pink */
-        .step1 { border-color: var(--primary-pink); }
-        /* Step 2: Blue */
-        .step2 { border-color: var(--soft-blue); }
-        .step2 label { color: var(--deep-blue); }
-        /* Step 3: Different Pink */
-        .step3 { border-color: #ffb3c6; }
-        /* Step 4: Greenish curiosity */
-        .step4 { border-color: #8ac926; }
-        .step4 label { color: #507d0d; }
-
-        /* Feedback Card (Finish Line) */
-        #awesome-feedback {
-            text-align: center; border: 3px solid var(--primary-pink);
-            background: rgba(255, 255, 255, 0.95);
+        .question-card input:focus, .question-card textarea:focus, .question-card select:focus {
+            border-color: var(--deep-purple); box-shadow: 0 0 8px rgba(114, 9, 183, 0.2);
         }
 
-        /* Elements bursts */
+        /* Purple Border Variants for Questions */
+        .card-purple-light { border: 3px dashed var(--violet-glow); }
+        .card-purple-deep { border: 3px dashed var(--deep-purple); }
+
+        /* Buttons Style Suite */
+        .btn { padding: 12px 28px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; outline: none; }
+        .btn-blue { background: linear-gradient(135deg, var(--primary-blue), #0096c7); color: white; box-shadow: 0 4px 12px rgba(0, 119, 182, 0.25); }
+        .btn-blue:hover { transform: scale(1.02); }
+        .btn-purple { background: linear-gradient(135deg, var(--deep-purple), var(--violet-glow)); color: white; box-shadow: 0 4px 12px rgba(114, 9, 183, 0.25); }
+        .btn-purple:hover { transform: scale(1.02); }
+        
+        #no-btn { position: absolute; transition: all 0.2s ease; }
+        #activation-deck { margin-top: 25px; z-index: 5; }
+
+        /* Heart Animation */
         .floating-element { position: absolute; pointer-events: none; animation: floatUp 2.5s ease-out forwards; z-index: 2000; }
         @keyframes floatUp { 0% { transform: translateY(0) scale(0.6); opacity: 1; } 100% { transform: translateY(-140px) scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div class="video-background">
-        <iframe 
-            src="https://www.youtube.com/embed/A4H-j_l9xNo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playlist=A4H-j_l9xNo" 
-            allow="autoplay; encrypted-media">
-        </iframe>
-    </div>
-    <div class="page-overlay"></div> <div id="proposal-overlay">
+    <div id="bg-0" class="bg-slide bg-active" style="background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1200&auto=format&fit=crop');"></div>
+    <div id="bg-1" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop');"></div>
+    <div id="bg-2" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1494774157365-9e04c67221bd?q=80&w=1200&auto=format&fit=crop');"></div>
+    <div id="bg-3" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop');"></div>
+    <div id="bg-4" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1517817748493-49ec54a32465?q=80&w=1200&auto=format&fit=crop');"></div>
+    <div id="bg-5" class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop');"></div>
+
+    <div class="page-tint"></div>
+
+    <div id="proposal-overlay">
         <div class="proposal-box">
-            <h2>To Maryann, 🌹</h2>
-            <h3 style="font-size: 1.4em; color: var(--deep-blue); margin-bottom: 30px;">
-                Will you be My girlfriend?<br><span style="font-size: 0.8em; color: var(--dark-pink);">- Mickey</span>
+            <h2 style="color: var(--primary-blue);">To Maryann, 🌹</h2>
+            <h3 style="font-size: 1.4em; color: var(--text-dark); margin-bottom: 30px;">
+                Will you be My girlfriend?<br><span style="font-size: 0.8em; color: var(--deep-purple);">- Mickey</span>
             </h3>
             <div style="display: flex; justify-content: center; gap: 30px; position: relative; height: 50px;">
-                <button class="btn btn-pink" style="width: 100px;" onclick="acceptProposal(event)">Yes! 💖</button>
-                <button class="btn btn-blue" id="no-btn" style="width: 100px;" onmouseover="escapeNoButton()">No</button>
+                <button class="btn btn-blue" style="width: 100px;" onclick="acceptProposal(event)">Yes! 💙</button>
+                <button class="btn btn-purple" id="no-btn" style="width: 100px;" onmouseover="escapeNoButton()">No</button>
             </div>
         </div>
     </div>
 
     <div id="main-content">
         <header>
-            <h1>To Maryann ❤️</h1>
-            <p>Every single day is a gift because of you.</p>
+            <h1>To Maryann 💙</h1>
+            <p>Every corner of this display was built completely out of appreciation for you.</p>
         </header>
 
-        <div class="glass-window" id="central-hub">
-            <div class="window-header">
-                <button class="tab-btn active-tab" id="reminder-tab" onclick="switchTab('reminders')">Daily Reminders ✨</button>
-                <button class="tab-btn" id="reason-tab" onclick="switchTab('reasons')">Reasons Why 🌊</button>
+        <div class="glass-hub" id="central-message-window">
+            <div class="hub-tabs">
+                <button class="tab-trigger active-state" id="tab-reminders" onclick="toggleHubTab('reminders')">Daily Reminders ✨</button>
+                <button class="tab-trigger" id="tab-reasons" onclick="toggleHubTab('reasons')">Reasons Why 🌊</button>
+                <button class="tab-trigger" id="tab-goals" onclick="toggleHubTab('goals')">Future Goals ✈️</button>
+                <button class="tab-trigger" id="tab-playlist" onclick="toggleHubTab('playlist')">Our Playlist 🎵</button>
             </div>
-            <div class="message-content" id="message-display">
-                Welcome, Maryann. Click the tabs above to read what Mickey is thinking...
+            <div class="display-window" id="hub-display-text">
+                Welcome, Maryann. Explore the navigation buttons above to read my notes...
             </div>
-            <div style="text-align: center; margin-top: 15px;">
-                <button class="btn btn-pink" onclick="cycleMessages(event)">Next Thought</button>
+            <div style="margin-top: 15px;">
+                <button class="btn btn-blue" onclick="rotateHubMessages(event)">Next Insight 📋</button>
             </div>
         </div>
 
-        <div id="quiz-start-container">
-            <button class="btn btn-blue" style="font-size: 1.2em; padding: 15px 40px;" onclick="startQuiz(event)">Unlock My Curiosity 🧩</button>
+        <div id="activation-deck">
+            <button class="btn btn-purple" style="font-size: 1.15em; padding: 14px 45px;" onclick="engageInteractiveQuiz(event)">Unlock My Curiosity 🧩</button>
         </div>
 
-        <div class="quiz-sequence-container" id="quiz-step-1">
-            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="quiz-form">
-                <div class="question-card step1">
-                    <label for="escape">If Mickey surprised you right now with a dream getaway, where are we escaping to? 🗺️</label>
-                    <input type="text" id="escape" name="Dream Escape" placeholder="e.g., A cozy cabin, the beachside..." required>
-                    <div style="margin-top: 25px;"><button type="button" class="btn btn-pink" onclick="nextQuizStep(2, event)">Next Question ➡️</button></div>
-                </div>
-            </form>
-        </div>
-
-        <div class="quiz-sequence-container" id="quiz-step-2">
-            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="quiz-form">
-                <div class="question-card step2">
-                    <label for="memory">What is your favorite sweetest memory of Mickey so far? 🥺</label>
-                    <textarea id="memory" name="Favorite Memory" rows="3" placeholder="Tell me the moment..." required></textarea>
-                    <div style="margin-top: 25px;"><button type="button" class="btn btn-blue" onclick="nextQuizStep(3, event)">Next Question ➡️</button></div>
-                </div>
-            </form>
-        </div>
-
-        <div class="quiz-sequence-container" id="quiz-step-3">
-            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="quiz-form">
-                <div class="question-card step3">
-                    <label for="superpower">Pick a special superpower for our relationship: ⚡</label>
-                    <select id="superpower" name="Superpower" required>
-                        <option value="" disabled selected>Choose a power...</option>
-                        <option value="Mind Reading">Knowing thoughts instantly</option>
-                        <option value="Teleportation">Blinking instantly to each other</option>
-                        <option value="Infinite Dates">BOTTOMLESS laughter & joy 💖</option>
-                    </select>
-                    <div style="margin-top: 25px;"><button type="button" class="btn btn-pink" onclick="nextQuizStep(4, event)">Next Question ➡️</button></div>
-                </div>
-            </form>
-        </div>
-
-        <div class="quiz-sequence-container" id="quiz-step-4">
-            <form id="master-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST">
-                <div class="question-card step4">
-                    <label for="song">Is there a specific song that makes you think of Mickey? 🎵</label>
-                    <input type="text" id="song" name="Song Title" placeholder="Track title or artist..." required>
+        <div class="interactive-quiz-step" id="step-wrapper-1">
+            <form class="individual-form-segment">
+                <div class="question-card card-purple-light">
+                    <label for="escape">1. If Mickey surprised you right now with a dream getaway trip, where are we escaping to? 🗺️</label>
+                    <input type="text" id="escape" name="1. Dream Getaway Destination" placeholder="e.g., A cozy cabin, the white sandy beaches..." required>
                     <div style="margin-top: 25px;">
-                        <button type="submit" id="final-submit" class="btn btn-pink" style="background: #8ac926;">Lock In Answers 🚀</button>
+                        <button type="button" class="btn btn-purple" onclick="shiftStep(2, 'bg-2', event)">Next Question ➡️</button>
                     </div>
                 </div>
             </form>
         </div>
 
-        <div class="quiz-sequence-container" id="quiz-step-5">
-            <div class="question-card step1 feedback-card">
-                <h2 style="color: var(--dark-pink);">Answers Locked! 💖</h2>
-                <p style="font-size: 1.2em; font-weight: 500;">Thank you, Maryann. Your beautiful responses have been saved in Mickey's private database. Every single one means the world.</p>
-                <p style="font-style: italic;">— With all my love, Mickey ✨</p>
+        <div class="interactive-quiz-step" id="step-wrapper-2">
+            <form class="individual-form-segment">
+                <div class="question-card card-purple-deep">
+                    <label for="memory">2. What is your absolute favorite, single sweetest memory of us so far? 🥺</label>
+                    <textarea id="memory" name="2. Sweetest Shared Memory" rows="3" placeholder="Tell me the specific moment that made you happiest..." required></textarea>
+                    <div style="margin-top: 25px;">
+                        <button type="button" class="btn btn-purple" onclick="shiftStep(3, 'bg-3', event)">Next Question ➡️</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="interactive-quiz-step" id="step-wrapper-3">
+            <form class="individual-form-segment">
+                <div class="question-card card-purple-light">
+                    <label for="superpower">3. Pick a special cosmic superpower for our relationship: ⚡</label>
+                    <select id="superpower" name="3. Relationship Superpower" required>
+                        <option value="" disabled selected>Choose a cosmic power...</option>
+                        <option value="Mind Reading">Telepathy: Knowing each other's thoughts instantly</option>
+                        <option value="Teleportation">Teleportation: Blink instantly to where the other is</option>
+                        <option value="Infinite Dates">Bottomless Joy: Zero distance constraints, infinite adventures</option>
+                    </select>
+                    <div style="margin-top: 25px;">
+                        <button type="button" class="btn btn-purple" onclick="shiftStep(4, 'bg-4', event)">Next Question ➡️</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="interactive-quiz-step" id="step-wrapper-4">
+            <form id="grand-master-form" action="https://formspree.io/f/michaealgithua@gmail.com" method="POST">
+                <div class="question-card card-purple-deep">
+                    <label for="song">4. Is there a specific song that makes you think of Mickey when it plays? 🎵</label>
+                    <input type="text" id="song" name="4. Dedicated Track Idea" placeholder="Track title or artist name..." required>
+                    <div style="margin-top: 25px;">
+                        <button type="submit" id="final-submit-trigger" class="btn btn-purple" style="width: 100%;">Lock In & Send Answers 🚀</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="interactive-quiz-step" id="step-wrapper-5">
+            <div class="question-card card-purple-light" style="background: rgba(255, 255, 255, 0.95); border-style: solid;">
+                <h2 style="color: var(--deep-purple); font-size: 2em; margin: 0 0 10px;">Answers Dispatched! 💖</h2>
+                <p style="font-size: 1.15em; line-height: 1.6; font-weight: 500; color: #333;">
+                    Thank you, Maryann! Your choices have bypassed the entire cloud infrastructure and landed straight into Mickey's inbox. 
+                </p>
+                <p style="font-style: italic; color: var(--primary-blue); margin-top: 15px;">
+                    "Every day with you is my favorite layout. Check your phone, I am probably reading your answers right now!" <br><br>
+                    <strong>— With all my love, Mickey ✨</strong>
+                </p>
             </div>
         </div>
 
@@ -246,19 +244,33 @@
         const messageDatabase = {
             reminders: [
                 "You are breathtakingly beautiful, Maryann, inside and out.",
-                "Your laugh completely resets my bad days.",
-                "You have the kindest soul I've ever crossed paths with.",
-                "Never doubt yourself; you are capable of absolutely anything."
+                "Your laugh completely resets my bad days and turns them beautiful.",
+                "You have the kindest, most gorgeous soul I've ever known.",
+                "Just thinking about your smile makes my entire day brighter."
             ],
             reasons: [
-                "I love how comfortable I feel when talking to you.",
-                "Your patient heart is my favorite part of you.",
-                "Out of billions of people, my heart chose you automatically."
+                "I love how completely comfortable and safe I feel whenever I talk to you.",
+                "The way your eyes look when you are happy is my absolute favorite view.",
+                "You bring out a version of me that is happier, kinder, and stronger.",
+                "Because out of billions of people, my heart chose you automatically."
+            ],
+            goals: [
+                "Taking a long evening beach walk with you without worrying about the time.",
+                "Building an incredible, successful future while keeping you smiling.",
+                "Exploring beautiful new places together and making lifelong memories.",
+                "Achieving huge milestones and having you right by my side to celebrate."
+            ],
+            playlist: [
+                "Every sweet love song sound track feels like it was written about you.",
+                "Hearing your favorite music instantly shifts my mood to pure joy.",
+                "I want to make a private playlist of songs that define our story.",
+                "Your voice is honestly the most calming melody in my entire life."
             ]
         };
 
-        const indices = { reminders: 0, reasons: 0 };
+        const indices = { reminders: 0, reasons: 0, goals: 0, playlist: 0 };
         let activeTab = 'reminders';
+        let currentFormStep = 0;
 
         function escapeNoButton() {
             const noBtn = document.getElementById('no-btn');
@@ -280,73 +292,70 @@
             }, 500);
         }
 
-        /* 💌 Consolidate Messages Logic */
-        function switchTab(tab) {
-            if(activeTab === tab) return;
-            activeTab = tab;
-            document.getElementById('reminder-tab').classList.toggle('active-tab');
-            document.getElementById('reason-tab').classList.toggle('active-tab');
-            document.getElementById('message-display').innerHTML = "..."; // Reset loader
-            createFloating(window.innerWidth/2, window.innerHeight/2);
+        /* Hub Interface Switching Engine */
+        function toggleHubTab(tabName) {
+            if(activeTab === tabName) return;
+            activeTab = tabName;
+            
+            document.querySelectorAll('.tab-trigger').forEach(btn => btn.classList.remove('active-state'));
+            document.getElementById(`tab-${tabName}`).classList.add('active-state');
+            
+            document.getElementById('hub-display-text').innerText = "Loading insights...";
         }
 
-        function cycleMessages(event) {
+        function rotateHubMessages(event) {
             const list = messageDatabase[activeTab];
             const idx = indices[activeTab];
-            document.getElementById('message-display').innerText = list[idx];
+            document.getElementById('hub-display-text').innerText = list[idx];
             indices[activeTab] = (idx + 1) % list.length;
             createFloating(event.clientX, event.clientY);
         }
 
-        /* 🧩 QUIZ SEQUENCE MASTER LOGIC */
-        let currentQuizStep = 0;
+        /* Quiz Step Engine */
+        function engageInteractiveQuiz(event) {
+            document.getElementById('central-message-window').style.opacity = 0;
+            document.getElementById('activation-deck').style.opacity = 0;
 
-        function startQuiz(event) {
-            // Fade out consolidated hub
-            document.getElementById('central-hub').style.opacity = 0;
-            document.getElementById('quiz-start-container').style.opacity = 0;
-            
             setTimeout(() => {
-                document.getElementById('central-hub').style.display = 'none';
-                document.getElementById('quiz-start-container').style.display = 'none';
+                document.getElementById('central-message-window').style.display = 'none';
+                document.getElementById('activation-deck').style.display = 'none';
                 
-                // Show Step 1
-                const nextContainer = document.getElementById('quiz-step-1');
-                nextContainer.classList.add('quiz-active');
-                currentQuizStep = 1;
-            }, 500);
+                changeBackground('bg-1');
+                document.getElementById('step-wrapper-1').classList.add('quiz-active');
+                currentFormStep = 1;
+            }, 450);
 
             createFloating(event.clientX, event.clientY);
         }
 
-        function nextQuizStep(nextStep, event) {
-            const currentContainer = document.getElementById(`quiz-step-${currentQuizStep}`);
+        function shiftStep(nextTargetStep, targetBackgroundImageId, event) {
+            const wrapper = document.getElementById(`step-wrapper-${currentFormStep}`);
+            const currentField = wrapper.querySelector('input, textarea, select');
             
-            // Input Validation check before proceeding
-            const input = currentContainer.querySelector('input, textarea, select');
-            if(input && !input.value) {
-                input.style.borderColor = 'red';
-                input.focus();
-                return; 
+            if (currentField && !currentField.value.trim()) {
+                currentField.style.borderColor = 'var(--deep-purple)';
+                currentField.focus();
+                return;
             }
 
-            // Fade out current
-            currentContainer.classList.remove('quiz-active');
+            wrapper.classList.remove('quiz-active');
+            changeBackground(targetBackgroundImageId);
 
             setTimeout(() => {
-                // Show Next
-                const nextContainer = document.getElementById(`quiz-step-${nextStep}`);
-                nextContainer.classList.add('quiz-active');
-                currentQuizStep = nextStep;
-            }, 500);
+                document.getElementById(`step-wrapper-${nextTargetStep}`).classList.add('quiz-active');
+                currentFormStep = nextTargetStep;
+            }, 450);
 
-            // Floating bursts on user click position
             createFloating(event.clientX, event.clientY);
         }
 
-        /* Elements bursts utility */
+        function changeBackground(targetId) {
+            document.querySelectorAll('.bg-slide').forEach(slide => slide.classList.remove('bg-active'));
+            document.getElementById(targetId).classList.add('bg-active');
+        }
+
         function createFloating(x, y) {
-            const pool = ['💖', '❤️', '✨', '💙', '🌸'];
+            const pool = ['💖', '💙', '✨', '🤍', '🎵'];
             const el = document.createElement('div');
             el.innerHTML = pool[Math.floor(Math.random() * pool.length)];
             el.classList.add('floating-element');
@@ -354,51 +363,50 @@
             el.style.top = `${y}px`;
             el.style.fontSize = `${Math.random() * 15 + 15}px`;
             document.body.appendChild(el);
-            setTimeout(() => { el.remove(); }, 2500);
+            setTimeout(() => el.remove(), 2500);
         }
 
-        /* 🚀 Master Submit Handler (Sends all answers) */
-        const masterForm = document.getElementById('master-form');
+        /* Form Submissions (AJAX Multi-segment processor) */
+        const masterForm = document.getElementById('grand-master-form');
         masterForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            const submitBtn = document.getElementById('final-submit');
-            submitBtn.innerText = "Locking them into my heart... 🔒";
-            submitBtn.disabled = true;
 
-            // Collect all forms data sequentially
-            const allForms = document.querySelectorAll('.quiz-form, #master-form');
-            const masterFormData = new FormData();
+            const submitTrigger = document.getElementById('final-submit-trigger');
+            submitTrigger.innerText = "Dispatching to Mickey... 🔒";
+            submitTrigger.disabled = true;
 
-            allForms.forEach(form => {
-                const stepData = new FormData(form);
-                for (let pair of stepData.entries()) {
-                    masterFormData.append(pair[0], pair[1]);
+            const payload = new FormData();
+            document.querySelectorAll('.individual-form-segment, #grand-master-form').forEach(formSegment => {
+                const elementData = new FormData(formSegment);
+                for (let entry of elementData.entries()) {
+                    payload.append(entry[0], entry[1]);
                 }
             });
 
-            // Submit master data via AJAX
             try {
                 const response = await fetch(masterForm.action, {
                     method: 'POST',
-                    body: masterFormData,
+                    body: payload,
                     headers: { 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
-                    // Slide into Feedback card
-                    const currentContainer = document.getElementById('quiz-step-4');
-                    currentContainer.classList.remove('quiz-active');
+                    document.getElementById('step-wrapper-4').classList.remove('quiz-active');
+                    changeBackground('bg-5');
                     setTimeout(() => {
-                        const feedbackContainer = document.getElementById('quiz-step-5');
-                        feedbackContainer.classList.add('quiz-active');
-                    }, 500);
-                    // Massive heart burst
-                    for(let i=0; i<15; i++) { setTimeout(() => createFloating(window.innerWidth/2, window.innerHeight/2), i*50); }
+                        document.getElementById('step-wrapper-5').classList.add('quiz-active');
+                    }, 450);
+
+                    for(let i=0; i<20; i++) {
+                        setTimeout(() => createFloating(window.innerWidth/2, window.innerHeight/2), i*40);
+                    }
+                } else {
+                    submitTrigger.innerText = "Submission Error 🥺";
+                    submitTrigger.disabled = false;
                 }
             } catch (error) {
-                submitBtn.innerText = "Error! Try Again 🥺";
-                submitBtn.disabled = false;
+                submitTrigger.innerText = "Connection Error 🥺";
+                submitTrigger.disabled = false;
             }
         });
     </script>
