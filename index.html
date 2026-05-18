@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Maryann ❤️</title>
+    <style>
+        :root {
+            /* Upgraded Luxury Palette: Soft Pinks mixed with Dreamy Sky Blues */
+            --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #c9e4de 50%, #ffc2d1 100%);
+            --primary-pink: #ff85a2;
+            --dark-pink: #f15bb5;
+            --soft-blue: #a2d2ff;
+            --deep-blue: #0077b6;
+            --text-purple: #4a0e4e;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-purple);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* Proposal Overlay Window */
+        #proposal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffccd5 0%, #bde0fe 100%);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .proposal-box {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 2px solid white;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        .proposal-box h2 {
+            color: var(--dark-pink);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .proposal-box p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        /* Main Content (Hidden until Yes is clicked) */
+        #main-content {
+            opacity: 0;
+            display: none;
+            max-width: 1000px;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            color: var(--dark-pink);
+            font-size: 3em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 8px rgba(241, 91, 181, 0.15);
+        }
+
+        header p {
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--deep-blue);
+        }
+
+        /* Dashboard of Windows */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        /* High-quality Glassmorphism Window Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 22px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(162, 210, 255, 0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(241, 91, 181, 0.25);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .pink-title { color: var(--dark-pink); }
+        .blue-title { color: var(--deep-blue); }
+
+        .display-text {
+            margin: 15px 0;
+            font-size: 1.15em;
+            line-height: 1.6;
+            font-weight: 500;
+            color: #444;
+        }
+
+        /* Custom Interactive Buttons with Pink/Blue Accents */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .btn-pink {
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            color: white;
+        }
+        .btn-pink:hover {
+            background: linear-gradient(135deg, var(--dark-pink), #d81b60);
+            transform: scale(1.03);
+        }
+
+        .btn-blue {
+            background: linear-gradient(135deg, var(--soft-blue), #4ea8de);
+            color: white;
+        }
+        .btn-blue:hover {
+            background: linear-gradient(135deg, #4ea8de, var(--deep-blue));
+            transform: scale(1.03);
+        }
+
+        #no-btn {
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+
+        /* Dynamic Floating Elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 2.5s ease-out forwards;
+            z-index: 2000;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.6); opacity: 1; }
+            100% { transform: translateY(-140px) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- STEP 1: The Opening Proposal Letter Window -->
+    <div id="proposal-overlay">
+        <div class="proposal-box" id="box-container">
+            <h2>To Maryann, 🌹</h2>
+            <p id="proposal-instruction">I have a very important question to ask you...</p>
+            <h3 style="font-size: 1.4em; color: var(--deep-blue); margin-bottom: 30px;">
+                Will you be My girlfriend?<br><span style="font-size: 0.8em; color: var(--dark-pink);">- Mickey</span>
+            </h3>
+            <div style="display: flex; justify-content: center; gap: 30px; position: relative; height: 50px;">
+                <button class="btn btn-pink" style="width: 100px;" onclick="acceptProposal(event)">Yes! 💖</button>
+                <button class="btn btn-blue" id="no-btn" style="width: 100px;" onmouseover="escapeNoButton()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 2: The Main Dashboard (Revealed after clicking Yes) -->
+    <div id="main-content">
+        <header>
+            <h1>To Maryann ❤️</h1>
+            <p>Every single button contains a piece of my heart. Keep clicking them!</p>
+        </header>
+
+        <div class="grid-container">
+
+            <!-- WINDOW 1: Reminders (Pink Theme) -->
+            <div class="card">
+                <h3 class="pink-title">✨ My Reminders to You</h3>
+                <div class="display-text" id="reminder-text">Click to read something I want you to remember today...</div>
+                <button class="btn btn-pink" onclick="cycleMessages('reminders', 'reminder-text', event)">Next Reminder</button>
+            </div>
+
+            <!-- WINDOW 2: Deep Reasons (Blue Theme) -->
+            <div class="card">
+                <h3 class="blue-title">🌊 Why You are the One</h3>
+                <div class="display-text" id="reason-text">There are endless reasons, let me share them one by one...</div>
+                <button class="btn btn-blue" onclick="cycleMessages('reasons', 'reason-text', event)">Discover Why</button>
+            </div>
+
+            <!-- WINDOW 3: Future Promises (Pink Theme) -->
+            <div class="card">
+                <h3 class="pink-title">💍 My Promises to You</h3>
+                <div class="display-text" id="promise-text">Click to see what I promise to always give you...</div>
+                <button class="btn btn-pink" onclick="cycleMessages('promises', 'promise-text', event)">See My Promise</button>
+            </div>
+
+            <!-- WINDOW 4: Short Flirty Thoughts (Blue Theme) -->
+            <div class="card">
+                <h3 class="blue-title">💭 Random Thoughts of You</h3>
+                <div class="display-text" id="thought-text">Wondering what's on Mickey's mind right now?</div>
+                <button class="btn btn-blue" onclick="cycleMessages('thoughts', 'thought-text', event)">Peek Inside My Mind</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Massive database of beautiful messages for Maryann
+        const messageDatabase = {
+            reminders: [
+                "You are breathtakingly beautiful, Maryann, inside and out.",
+                "Your laugh completely resets my bad days and turns them beautiful.",
+                "You have the kindest soul I've ever cross paths with.",
+                "Never doubt yourself; you are capable of absolutely anything.",
+                "You make my entire universe much brighter just by existing."
+            ],
+            reasons: [
+                "I love how completely comfortable and safe I feel when talking to you.",
+                "The way your eyes look when you are happy is my absolute favorite view.",
+                "You bring out a version of me that is happier, kinder, and stronger.",
+                "Your patience, grace, and how uniquely beautiful you handle everything.",
+                "Because out of billions of people, my heart chose you automatically."
+            ],
+            promises: [
+                "I promise to listen to you, even when you speak in quiet whispers.",
+                "I promise to stand firmly by your side through every single storm.",
+                "I promise to always make sure you know how incredibly valued you are.",
+                "I promise to keep choosing you, day after day, without hesitation.",
+                "I promise to respect you, support your dreams, and guard your heart safely."
+            ],
+            thoughts: [
+                "Right now, I am probably missing you or looking at your pictures.",
+                "I still smile like a complete idiot whenever your name pops up on my screen.",
+                "If I could wrap myself around you right now, I wouldn't let go for hours.",
+                "You are the best plot twist life has ever thrown my way.",
+                "Everything feels significantly sweeter when I share it with you."
+            ]
+        };
+
+        // Tracker to smoothly loop through arrays individually
+        const indices = { reminders: 0, reasons: 0, promises: 0, thoughts: 0 };
+
+        // Playful: Makes the 'No' button run away if she hovers over it
+        function escapeNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            // Generate random placement values within the container boundaries
+            const randomX = Math.floor((Math.random() - 0.5) * 200);
+            const randomY = Math.floor((Math.random() - 0.5) * 120);
+            
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        // What happens when she hits YES!
+        function acceptProposal(e) {
+            // Burst a massive amount of mixed hearts
+            for(let i=0; i<15; i++) {
+                setTimeout(() => createFloatingElements(e.clientX + (Math.random()-0.5)*150, e.clientY + (Math.random()-0.5)*150), i*50);
+            }
+            
+            // Fade out the proposal screen smooth
+            const overlay = document.getElementById('proposal-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.visibility = 'hidden';
+                
+                // Show the beautiful letter boards dashboard
+                const main = document.getElementById('main-content');
+                main.style.display = 'flex';
+                setTimeout(() => { main.style.opacity = '1'; }, 50);
+            }, 500);
+        }
+
+        // Unified function to handle cycling through any message list smoothly
+        function cycleMessages(category, displayId, event) {
+            const list = messageDatabase[category];
+            const currentIndex = indices[category];
+            
+            const element = document.getElementById(displayId);
+            element.style.opacity = 0;
+            
+            setTimeout(() => {
+                element.innerText = list[currentIndex];
+                element.style.opacity = 1;
+            }, 200);
+
+            // Increment and wrap around
+            indices[category] = (currentIndex + 1) % list.length;
+            
+            createFloatingElements(event.clientX, event.clientY);
+        }
+
+        // Generates Pink Hearts and Blue Sparks alternatingly on clicks
+        function createFloatingElements(x, y) {
+            const pool = ['💖', '❤️', '✨', '💙', '🌸'];
+            for (let i = 0; i < 4; i++) {
+                const el = document.createElement('div');
+                el.innerHTML = pool[Math.floor(Math.random() * pool.length)];
+                el.classList.add('floating-element');
+                
+                const offsetX = (Math.random() - 0.5) * 50;
+                el.style.left = `${x + offsetX}px`;
+                el.style.top = `${y}px`;
+                el.style.fontSize = `${Math.random() * 16 + 16}px`;
+
+                document.body.appendChild(el);
+                setTimeout(() => { el.remove(); }, 2500);
+            }
+        }
+    </script>
+</body>
+</html>
