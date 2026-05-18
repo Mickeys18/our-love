@@ -6,19 +6,41 @@
     <title>For Maryann ❤️</title>
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #c9e4de 50%, #ffc2d1 100%);
+            /* Upgraded Luxury Palette */
+            --bg-overlay: rgba(255, 229, 236, 0.85); /* Pinkish transparency */
             --primary-pink: #ff85a2;
             --dark-pink: #f15bb5;
             --soft-blue: #a2d2ff;
             --deep-blue: #0077b6;
             --text-purple: #4a0e4e;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: 2px solid rgba(255, 255, 255, 0.6);
         }
 
-        body {
-            margin: 0; padding: 20px; min-height: 100vh;
-            background: var(--bg-gradient); font-family: 'Segoe UI', Roboto, sans-serif;
-            color: var(--text-purple); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; overflow-x: hidden;
+        body, html {
+            margin: 0; padding: 0; height: 100vh; width: 100vw;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-purple);
+            overflow: hidden; /* Lock scroll, use overlay layout */
+        }
+
+        /* 🎬 Dynamic Video Background */
+        .video-background {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2; overflow: hidden;
+        }
+
+        .video-background iframe {
+            position: absolute; top: 50%; left: 50%;
+            width: 100vw; height: 100vh; transform: translate(-50%, -50%);
+            object-fit: cover; /* Important for dynamic fitting */
+            pointer-events: none; /* Can't interact with background video */
+        }
+
+        /* Full Screen Soft-Pink Overlay over video */
+        .page-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-overlay); z-index: -1;
         }
 
         /* Proposal Overlay Window */
@@ -35,84 +57,99 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 2px solid white; max-width: 450px; width: 90%;
         }
 
-        /* Main Content Grid */
+        /* Main Content Container */
         #main-content {
-            opacity: 0; display: none; max-width: 1000px; width: 100%;
-            flex-direction: column; align-items: center; transition: opacity 0.8s ease;
+            opacity: 0; display: none; height: 100vh; width: 100vw;
+            flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.8s ease;
         }
 
-        header h1 { color: var(--dark-pink); font-size: 3em; margin-bottom: 5px; text-align: center; }
-        header p { font-style: italic; font-size: 1.2em; color: var(--deep-blue); text-align: center; margin-bottom: 30px; }
+        header { margin-bottom: 30px; text-align: center; }
+        header h1 { color: var(--dark-pink); font-size: 2.8em; margin: 0; }
+        header p { font-style: italic; color: var(--deep-blue); font-size: 1.1em; margin: 5px 0 0; }
 
-        /* Elegant Online Image Display Styling */
-        .image-container {
-            display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-bottom: 40px; width: 100%;
+        /* 💌 CONSOLIDATED GLASS MESSAGING HUB */
+        .glass-window {
+            background: var(--glass); backdrop-filter: blur(10px);
+            border: var(--glass-border); border-radius: 25px;
+            padding: 30px; width: 90%; max-width: 600px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            transition: all 0.5s ease; position: absolute; z-index: 10;
         }
 
-        .photo-frame {
-            background: white; padding: 12px; border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transform: rotate(2deg); transition: transform 0.3s;
-            max-width: 280px; width: 100%; text-align: center; box-sizing: border-box;
-        }
+        .window-header { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .tab-btn { background: none; border: 2px solid transparent; color: #666; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .tab-btn.active-tab { color: var(--dark-pink); border-color: var(--dark-pink); background: rgba(241, 91, 181, 0.1); }
 
-        .photo-frame:nth-child(even) { transform: rotate(-2deg); }
-        .photo-frame:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
+        .message-content { min-height: 120px; font-weight: 500; font-size: 1.15em; color: #444; line-height: 1.6; text-align: center; }
 
-        .photo-frame img {
-            width: 100%; height: 260px; object-fit: cover; border-radius: 12px;
-        }
-
-        .photo-caption {
-            font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-top: 12px; color: var(--dark-pink); font-size: 1.05em;
-        }
-
-        /* Windows Layout */
-        .grid-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; width: 100%; margin-bottom: 40px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.6); border-radius: 22px;
-            padding: 30px; text-align: center; box-shadow: 0 10px 25px rgba(162, 210, 255, 0.2);
-            display: flex; flex-direction: column; justify-content: space-between; min-height: 180px;
-        }
-
-        /* Interactive Quiz Box */
-        .quiz-card {
-            background: rgba(255, 255, 255, 0.85); border: 3px dashed var(--soft-blue);
-            border-radius: 24px; padding: 35px; width: 100%; max-width: 650px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05); box-sizing: border-box;
-        }
-
-        .quiz-card h2 { color: var(--deep-blue); text-align: center; margin-top: 0; }
-
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-purple); }
-        
-        .form-group input[type="text"], .form-group select {
-            width: 100%; padding: 12px; border: 2px solid var(--soft-blue); 
-            border-radius: 12px; box-sizing: border-box; font-size: 1em; outline: none;
-        }
-
-        .form-group input[type="text"]:focus { border-color: var(--dark-pink); }
-
-        /* Buttons styling */
-        .btn { padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; }
-        .btn-pink { background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink)); color: white; }
+        /* General Buttons Styling */
+        .btn { padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; border: none; transition: all 0.2s ease; outline: none;}
+        .btn-pink { background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink)); color: white; box-shadow: 0 4px 12px rgba(241, 91, 181, 0.3); }
         .btn-pink:hover { transform: scale(1.03); }
         .btn-blue { background: linear-gradient(135deg, var(--soft-blue), #4ea8de); color: white; }
-        .btn-blue:hover { transform: scale(1.03); }
         #no-btn { position: absolute; transition: all 0.2s ease; }
 
+        /* Unlock Curiosity Button below Message window */
+        #quiz-start-container { margin-top: 30px; position: relative; z-index: 5; }
+
+        /* 🎯 MULTI-STEP QUIZ SEQUENCE CONTAINERS */
+        .quiz-sequence-container {
+            position: absolute; display: none; opacity: 0;
+            width: 90%; max-width: 600px; z-index: 15;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+        }
+
+        .quiz-active { display: block; opacity: 1; transform: translateY(0); }
+
+        /* Base styling for Question Cards */
+        .question-card {
+            background: white; border-radius: 25px; padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 3px dashed var(--primary-pink);
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .question-card label { display: block; font-weight: bold; font-size: 1.25em; margin-bottom: 20px; color: var(--text-purple); text-align: center;}
+        .question-card input, .question-card textarea, .question-card select {
+            width: 100%; padding: 14px; border-radius: 12px; border: 2px solid var(--soft-blue); box-sizing: border-box; font-size: 1.1em;
+            outline: none; transition: 0.3s;
+        }
+        .question-card input:focus, .question-card textarea:focus { border-color: var(--dark-pink); }
+
+        /* Step colors override */
+        /* Step 1: Pink */
+        .step1 { border-color: var(--primary-pink); }
+        /* Step 2: Blue */
+        .step2 { border-color: var(--soft-blue); }
+        .step2 label { color: var(--deep-blue); }
+        /* Step 3: Different Pink */
+        .step3 { border-color: #ffb3c6; }
+        /* Step 4: Greenish curiosity */
+        .step4 { border-color: #8ac926; }
+        .step4 label { color: #507d0d; }
+
+        /* Feedback Card (Finish Line) */
+        #awesome-feedback {
+            text-align: center; border: 3px solid var(--primary-pink);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Elements bursts */
         .floating-element { position: absolute; pointer-events: none; animation: floatUp 2.5s ease-out forwards; z-index: 2000; }
         @keyframes floatUp { 0% { transform: translateY(0) scale(0.6); opacity: 1; } 100% { transform: translateY(-140px) scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div id="proposal-overlay">
+    <div class="video-background">
+        <iframe 
+            src="https://www.youtube.com/embed/A4H-j_l9xNo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playlist=A4H-j_l9xNo" 
+            allow="autoplay; encrypted-media">
+        </iframe>
+    </div>
+    <div class="page-overlay"></div> <div id="proposal-overlay">
         <div class="proposal-box">
             <h2>To Maryann, 🌹</h2>
             <h3 style="font-size: 1.4em; color: var(--deep-blue); margin-bottom: 30px;">
@@ -128,86 +165,100 @@
     <div id="main-content">
         <header>
             <h1>To Maryann ❤️</h1>
-            <p>Every single corner of this page was built just to make you smile.</p>
+            <p>Every single day is a gift because of you.</p>
         </header>
 
-        <div class="image-container">
-            <div class="photo-frame">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/4984360665315307341_0" alt="Cute Pastel Romance">
-                <div class="photo-caption">You & Me ✨</div>
+        <div class="glass-window" id="central-hub">
+            <div class="window-header">
+                <button class="tab-btn active-tab" id="reminder-tab" onclick="switchTab('reminders')">Daily Reminders ✨</button>
+                <button class="tab-btn" id="reason-tab" onclick="switchTab('reasons')">Reasons Why 🌊</button>
             </div>
-            <div class="photo-frame">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/6404178441251481132_0" alt="Beautiful Heart Aesthetic">
-                <div class="photo-caption">My Whole Heart 🌸</div>
+            <div class="message-content" id="message-display">
+                Welcome, Maryann. Click the tabs above to read what Mickey is thinking...
             </div>
-        </div>
-
-        <div class="grid-container">
-            <div class="card">
-                <h3 style="color: var(--dark-pink);">✨ Daily Reminders</h3>
-                <div id="reminder-text" style="margin: 15px 0; font-weight: 500;">Click below to see a special note...</div>
-                <button class="btn btn-pink" onclick="cycle('reminders', 'reminder-text', event)">Next Reminder</button>
-            </div>
-
-            <div class="card">
-                <h3 style="color: var(--deep-blue);">🌊 Why You are the One</h3>
-                <div id="reason-text" style="margin: 15px 0; font-weight: 500;">Let me tell you why you're unique...</div>
-                <button class="btn btn-blue" onclick="cycle('reasons', 'reason-text', event)">Discover Why</button>
+            <div style="text-align: center; margin-top: 15px;">
+                <button class="btn btn-pink" onclick="cycleMessages(event)">Next Thought</button>
             </div>
         </div>
 
-        <div class="quiz-card">
-            <h2>🧩 The Mickey & Maryann Challenge</h2>
-            <p style="text-align: center; margin-bottom: 25px; font-style: italic; color: #555;">Answer these honestly, your responses go right to Mickey! 😉</p>
-            
-            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST">
-                
-                <div class="form-group">
-                    <label for="date">1. What is your absolute definition of a perfect date night? ✈️</label>
-                    <input type="text" id="date" name="Maryann Perfect Date" placeholder="e.g., Beach stroll, watching movies together..." required>
-                </div>
+        <div id="quiz-start-container">
+            <button class="btn btn-blue" style="font-size: 1.2em; padding: 15px 40px;" onclick="startQuiz(event)">Unlock My Curiosity 🧩</button>
+        </div>
 
-                <div class="form-group">
-                    <label for="quality">2. What is Mickey's single best attribute? 👀</label>
-                    <select id="quality" name="Mickeys Best Trait" required>
-                        <option value="" disabled selected>Choose one...</option>
-                        <option value="His Smart Brain">His sharp, brilliant IT mind</option>
-                        <option value="His Romantic Heart">How incredibly romantic he is</option>
-                        <option value="His Protector Vibe">His deeply caring, loyal soul</option>
-                        <option value="All of the above">Without a doubt, all of the above! 💖</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="miss-rate">3. On a scale of 1-100%, how much do you miss me right now? 📈</label>
-                    <input type="text" id="miss-rate" name="Missing Scale" placeholder="e.g., 1000000%" required>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button type="submit" class="btn btn-pink" style="padding: 15px 40px; font-size: 1.1em;">Lock In & Send Answers 🚀</button>
+        <div class="quiz-sequence-container" id="quiz-step-1">
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="quiz-form">
+                <div class="question-card step1">
+                    <label for="escape">If Mickey surprised you right now with a dream getaway, where are we escaping to? 🗺️</label>
+                    <input type="text" id="escape" name="Dream Escape" placeholder="e.g., A cozy cabin, the beachside..." required>
+                    <div style="margin-top: 25px;"><button type="button" class="btn btn-pink" onclick="nextQuizStep(2, event)">Next Question ➡️</button></div>
                 </div>
             </form>
         </div>
+
+        <div class="quiz-sequence-container" id="quiz-step-2">
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="quiz-form">
+                <div class="question-card step2">
+                    <label for="memory">What is your favorite sweetest memory of Mickey so far? 🥺</label>
+                    <textarea id="memory" name="Favorite Memory" rows="3" placeholder="Tell me the moment..." required></textarea>
+                    <div style="margin-top: 25px;"><button type="button" class="btn btn-blue" onclick="nextQuizStep(3, event)">Next Question ➡️</button></div>
+                </div>
+            </form>
+        </div>
+
+        <div class="quiz-sequence-container" id="quiz-step-3">
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="quiz-form">
+                <div class="question-card step3">
+                    <label for="superpower">Pick a special superpower for our relationship: ⚡</label>
+                    <select id="superpower" name="Superpower" required>
+                        <option value="" disabled selected>Choose a power...</option>
+                        <option value="Mind Reading">Knowing thoughts instantly</option>
+                        <option value="Teleportation">Blinking instantly to each other</option>
+                        <option value="Infinite Dates">BOTTOMLESS laughter & joy 💖</option>
+                    </select>
+                    <div style="margin-top: 25px;"><button type="button" class="btn btn-pink" onclick="nextQuizStep(4, event)">Next Question ➡️</button></div>
+                </div>
+            </form>
+        </div>
+
+        <div class="quiz-sequence-container" id="quiz-step-4">
+            <form id="master-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST">
+                <div class="question-card step4">
+                    <label for="song">Is there a specific song that makes you think of Mickey? 🎵</label>
+                    <input type="text" id="song" name="Song Title" placeholder="Track title or artist..." required>
+                    <div style="margin-top: 25px;">
+                        <button type="submit" id="final-submit" class="btn btn-pink" style="background: #8ac926;">Lock In Answers 🚀</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="quiz-sequence-container" id="quiz-step-5">
+            <div class="question-card step1 feedback-card">
+                <h2 style="color: var(--dark-pink);">Answers Locked! 💖</h2>
+                <p style="font-size: 1.2em; font-weight: 500;">Thank you, Maryann. Your beautiful responses have been saved in Mickey's private database. Every single one means the world.</p>
+                <p style="font-style: italic;">— With all my love, Mickey ✨</p>
+            </div>
+        </div>
+
     </div>
 
     <script>
         const messageDatabase = {
             reminders: [
                 "You are breathtakingly beautiful, Maryann, inside and out.",
-                "Your laugh completely resets my bad days and turns them beautiful.",
-                "You have the kindest, most gorgeous soul I've ever known.",
-                "Never doubt yourself; you are capable of absolutely anything.",
-                "Just thinking about your smile makes my entire day brighter."
+                "Your laugh completely resets my bad days.",
+                "You have the kindest soul I've ever crossed paths with.",
+                "Never doubt yourself; you are capable of absolutely anything."
             ],
             reasons: [
-                "I love how completely comfortable and safe I feel whenever I talk to you.",
-                "The way your eyes look when you are happy is my absolute favorite view.",
-                "You bring out a version of me that is happier, kinder, and stronger.",
-                "Because out of billions of people, my heart chose you automatically."
+                "I love how comfortable I feel when talking to you.",
+                "Your patient heart is my favorite part of you.",
+                "Out of billions of people, my heart chose you automatically."
             ]
         };
 
         const indices = { reminders: 0, reasons: 0 };
+        let activeTab = 'reminders';
 
         function escapeNoButton() {
             const noBtn = document.getElementById('no-btn');
@@ -229,15 +280,71 @@
             }, 500);
         }
 
-        var textBoxCache = {};
-        function cycle(category, displayId, event) {
-            const list = messageDatabase[category];
-            const idx = indices[category];
-            document.getElementById(displayId).innerText = list[idx];
-            indices[category] = (idx + 1) % list.length;
+        /* 💌 Consolidate Messages Logic */
+        function switchTab(tab) {
+            if(activeTab === tab) return;
+            activeTab = tab;
+            document.getElementById('reminder-tab').classList.toggle('active-tab');
+            document.getElementById('reason-tab').classList.toggle('active-tab');
+            document.getElementById('message-display').innerHTML = "..."; // Reset loader
+            createFloating(window.innerWidth/2, window.innerHeight/2);
+        }
+
+        function cycleMessages(event) {
+            const list = messageDatabase[activeTab];
+            const idx = indices[activeTab];
+            document.getElementById('message-display').innerText = list[idx];
+            indices[activeTab] = (idx + 1) % list.length;
             createFloating(event.clientX, event.clientY);
         }
 
+        /* 🧩 QUIZ SEQUENCE MASTER LOGIC */
+        let currentQuizStep = 0;
+
+        function startQuiz(event) {
+            // Fade out consolidated hub
+            document.getElementById('central-hub').style.opacity = 0;
+            document.getElementById('quiz-start-container').style.opacity = 0;
+            
+            setTimeout(() => {
+                document.getElementById('central-hub').style.display = 'none';
+                document.getElementById('quiz-start-container').style.display = 'none';
+                
+                // Show Step 1
+                const nextContainer = document.getElementById('quiz-step-1');
+                nextContainer.classList.add('quiz-active');
+                currentQuizStep = 1;
+            }, 500);
+
+            createFloating(event.clientX, event.clientY);
+        }
+
+        function nextQuizStep(nextStep, event) {
+            const currentContainer = document.getElementById(`quiz-step-${currentQuizStep}`);
+            
+            // Input Validation check before proceeding
+            const input = currentContainer.querySelector('input, textarea, select');
+            if(input && !input.value) {
+                input.style.borderColor = 'red';
+                input.focus();
+                return; 
+            }
+
+            // Fade out current
+            currentContainer.classList.remove('quiz-active');
+
+            setTimeout(() => {
+                // Show Next
+                const nextContainer = document.getElementById(`quiz-step-${nextStep}`);
+                nextContainer.classList.add('quiz-active');
+                currentQuizStep = nextStep;
+            }, 500);
+
+            // Floating bursts on user click position
+            createFloating(event.clientX, event.clientY);
+        }
+
+        /* Elements bursts utility */
         function createFloating(x, y) {
             const pool = ['💖', '❤️', '✨', '💙', '🌸'];
             const el = document.createElement('div');
@@ -249,6 +356,51 @@
             document.body.appendChild(el);
             setTimeout(() => { el.remove(); }, 2500);
         }
+
+        /* 🚀 Master Submit Handler (Sends all answers) */
+        const masterForm = document.getElementById('master-form');
+        masterForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('final-submit');
+            submitBtn.innerText = "Locking them into my heart... 🔒";
+            submitBtn.disabled = true;
+
+            // Collect all forms data sequentially
+            const allForms = document.querySelectorAll('.quiz-form, #master-form');
+            const masterFormData = new FormData();
+
+            allForms.forEach(form => {
+                const stepData = new FormData(form);
+                for (let pair of stepData.entries()) {
+                    masterFormData.append(pair[0], pair[1]);
+                }
+            });
+
+            // Submit master data via AJAX
+            try {
+                const response = await fetch(masterForm.action, {
+                    method: 'POST',
+                    body: masterFormData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    // Slide into Feedback card
+                    const currentContainer = document.getElementById('quiz-step-4');
+                    currentContainer.classList.remove('quiz-active');
+                    setTimeout(() => {
+                        const feedbackContainer = document.getElementById('quiz-step-5');
+                        feedbackContainer.classList.add('quiz-active');
+                    }, 500);
+                    // Massive heart burst
+                    for(let i=0; i<15; i++) { setTimeout(() => createFloating(window.innerWidth/2, window.innerHeight/2), i*50); }
+                }
+            } catch (error) {
+                submitBtn.innerText = "Error! Try Again 🥺";
+                submitBtn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>
